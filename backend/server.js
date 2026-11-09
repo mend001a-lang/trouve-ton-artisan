@@ -38,7 +38,11 @@ const transporteur = nodemailer.createTransport({
 
 // Autoriser les requêtes de notre application React
 app.use(cors({
-  origin: "http://localhost:5173"
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://trouve-ton-artisan-1-9849.onrender.com"
+  ]
 }));
 
 // Route d'accueil
