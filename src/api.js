@@ -1,5 +1,5 @@
 
-const API_URL = "http://localhost:3001";
+const API_URL = "https://trouve-ton-artisan-yagt.onrender.com";
 
 // Récupérer tous les artisans depuis notre API
 export async function recupererArtisans() {
