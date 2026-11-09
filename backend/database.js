@@ -1,5 +1,8 @@
 
 const { Sequelize } = require("sequelize");
+const fs = require("fs");
+const path = require("path");
+
 require("dotenv").config();
 
 const sequelize = new Sequelize(
@@ -10,7 +13,17 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT),
     dialect: "mysql",
-    logging: false
+    logging: false,
+
+    dialectOptions: {
+      ssl: {
+        ca: fs.readFileSync(
+          path.join(__dirname, "isrgrootx1.pem"),
+          "utf8"
+        ),
+        rejectUnauthorized: true
+      }
+    }
   }
 );
 
