@@ -1,0 +1,16 @@
+
+# Informations confidentielles
+.env
+
+# Dépendances Node.js
+node_modules/
+# Fichiers de configuration privés
+.env.*
+backend/.env
+backend/.env.*
+
+# Fichiers générés par Vite
+dist/
+
+# Journaux
+*.loggit add -n 

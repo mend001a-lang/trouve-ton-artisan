@@ -1,0 +1,62 @@
+
+:root {
+  font-family: Arial, sans-serif;
+  color: #384050;
+  background-color: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+h1,
+h2 {
+  color: #00497c;
+}
+
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+header nav a:hover {
+  color: #82b864;
+}
+
+/* ===============================
+   HEADER RESPONSIVE - MOBILE
+================================ */
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  header .logo {
+    text-align: center;
+  }
+
+  header nav {
+    justify-content: center;
+  }
+}
