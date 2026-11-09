@@ -17,8 +17,8 @@ function Header() {
     async function chargerCategories() {
       try {
         const reponse = await fetch(
-          "http://localhost:3001/categories"
-        );
+  "https://trouve-ton-artisan-yagt.onrender.com/categories"
+);
 
         if (!reponse.ok) {
           throw new Error("Impossible de charger les catégories.");

@@ -17,8 +17,8 @@ function Artisans() {
 
       try {
         const url = categorie
-          ? `http://localhost:3001/artisans?categorie=${encodeURIComponent(categorie)}`
-          : "http://localhost:3001/artisans";
+  ? `https://trouve-ton-artisan-yagt.onrender.com/artisans?categorie=${encodeURIComponent(categorie)}`
+  : "https://trouve-ton-artisan-yagt.onrender.com/artisans";
 
         const reponse = await fetch(url);
 

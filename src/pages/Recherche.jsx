@@ -21,9 +21,9 @@ function Recherche() {
       }
 
       try {
-        const reponse = await fetch(
-          `http://localhost:3001/artisans?nom=${encodeURIComponent(nomArtisan)}`
-        );
+       const reponse = await fetch(
+  `https://trouve-ton-artisan-yagt.onrender.com/artisans?nom=${encodeURIComponent(nomArtisan)}`
+);
 
         if (!reponse.ok) {
           throw new Error("Impossible de rechercher les artisans.");

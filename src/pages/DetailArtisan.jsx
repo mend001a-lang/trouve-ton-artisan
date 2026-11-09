@@ -24,8 +24,8 @@ function DetailArtisan() {
     async function chargerArtisan() {
       try {
         const reponse = await fetch(
-          `http://localhost:3001/artisans/${id}`
-        );
+  `https://trouve-ton-artisan-yagt.onrender.com/artisans/${id}`
+);
 
         if (!reponse.ok) {
           throw new Error("Impossible de récupérer cet artisan.");
@@ -65,7 +65,7 @@ function DetailArtisan() {
 
     try {
       const reponse = await fetch(
-        "http://localhost:3001/contact",
+        "https://trouve-ton-artisan-yagt.onrender.com/contact",
         {
           method: "POST",
           headers: {
