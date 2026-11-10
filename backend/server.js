@@ -1,12 +1,26 @@
 require("dotenv").config();
+
+// ===============================
+// IMPORTATION DES MODULES
+// ===============================
+
 const express = require("express");
+const { Resend } = require("resend");
 const cors = require("cors");
 const sequelize = require("./database");
+
 const Artisan = require("./models/Artisan");
 const Specialite = require("./models/Specialite");
 const Categorie = require("./models/Categorie");
+
 const nodemailer = require("nodemailer");
 const { rateLimit } = require("express-rate-limit");
+
+// ===============================
+// CONFIGURATION RESEND
+// ===============================
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 
 // Un artisan appartient à une spécialité
@@ -299,16 +313,26 @@ app.post("/contact", limiteContact, async (req, res) => {
       });
     }
 
-    // 5. Envoyer l'email avec Nodemailer
-    await transporteur.sendMail({
-      from: process.env.GMAIL_USER,
-      to: artisan.email,
-      replyTo: email.trim(),
-      subject: `Trouve ton artisan - ${objet.trim()}`,
-      text: `
+   // ===============================
+// 5. ENVOYER L'EMAIL AVEC RESEND
+// ===============================
+
+const { data, error } = await resend.emails.send({
+  from: "Trouve ton artisan <onboarding@resend.dev>",
+
+  // Adresse de test autorisée par Resend
+  to: process.env.RESEND_TEST_EMAIL,
+
+  replyTo: email.trim(),
+
+  subject: `Trouve ton artisan - ${objet.trim()}`,
+
+  text: `
 Nouveau message envoyé depuis Trouve ton artisan.
 
 Artisan : ${artisan.nom}
+Email de l'artisan : ${artisan.email}
+
 Nom du visiteur : ${nom.trim()}
 Email du visiteur : ${email.trim()}
 
@@ -316,9 +340,19 @@ Objet : ${objet.trim()}
 
 Message :
 ${message.trim()}
-      `
-    });
+  `
+});
 
+// Vérifier si Resend a refusé l'envoi
+if (error) {
+  console.error("Erreur Resend :", error);
+
+  return res.status(502).json({
+    erreur: "Impossible d'envoyer votre message pour le moment."
+  });
+}
+
+console.log("Email accepté par Resend :", data?.id);
     // 6. Confirmer l'envoi
     res.status(200).json({
       message: "Votre message a été envoyé avec succès."

@@ -17,6 +17,7 @@
     "express-rate-limit": "^8.7.3",
     "mysql2": "^3.24.6",
     "nodemailer": "^10.4.0",
+    "resend": "^6.37.0",
     "sequelize": "^6.37.8"
   }
 }

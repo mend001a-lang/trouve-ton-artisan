@@ -20,16 +20,16 @@ function DetailArtisan() {
   const [messageContact, setMessageContact] = useState("");
   const [envoiEnCours, setEnvoiEnCours] = useState(false);
 
-  useEffect(() => {
-    async function chargerArtisan() {
-      try {
-        const reponse = await fetch(
-  `https://trouve-ton-artisan-yagt.onrender.com/artisans/${id}`
-);
+ useEffect(() => {
+  async function chargerArtisan() {
+    try {
+      const reponse = await fetch(
+        `https://trouve-ton-artisan-yagt.onrender.com/artisans/${id}`
+      );
 
-        if (!reponse.ok) {
-          throw new Error("Impossible de récupérer cet artisan.");
-        }
+      if (!reponse.ok) {
+        throw new Error("Impossible de récupérer cet artisan.");
+      }
 
         const donnees = await reponse.json();
         setArtisan(donnees);
@@ -63,22 +63,23 @@ function DetailArtisan() {
     setMessageContact("");
     setEnvoiEnCours(true);
 
-    try {
-      const reponse = await fetch(
-        "https://trouve-ton-artisan-yagt.onrender.com/contact",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-  ...formulaire,
-  id_artisan: artisan.id_artisan
-})
-        }
-      );
+  try {
+  const reponse = await fetch(
+    "https://trouve-ton-artisan-yagt.onrender.com/contact",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        ...formulaire,
+        id_artisan: artisan.id_artisan
+      })
+    }
+  );
 
-      const donnees = await reponse.json();
+  const donnees = await reponse.json();
+
 
       if (!reponse.ok) {
         throw new Error(
